@@ -10,7 +10,7 @@ The model looks at things like:
 - Basic box score stats (shooting percentages, rebounds, assists)
 - Game context (home court, rest days, back-to-backs)
 
-**Training Data:** 2022-23 and 2023-24 NBA seasons
+**Training Data:** 2021-22, 2022-23 and 2023-24 NBA seasons
 **Test Data:** 2024-25 season. Possibly several games of 2025-26 season up for implementation.
 
 **Goal:** Achieve 65-70% accuracy with proper probability calibration (Brier Score < 0.24)
@@ -154,6 +154,8 @@ Right now the model is pretty basic. Some things I'd like to improve:
 - Include betting lines as features
 - Try neural networks
 - Make predictions for future games
+- Try to also include playoffs?
+- Be able to run a playoff simulations
 
 ## License
 This is a student project - feel free to use the code for learning purposes!
