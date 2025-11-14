@@ -138,7 +138,7 @@ python src/evaluate.py
 - API rate limits: ~1-2 requests per second (respected in code)
 
 **Date Ranges:**
-- Training: October 2022 - April 2024
+- Training: October 2021 - April 2024
 - Test: October 2024 - January 2025
 
 ## About the Code
