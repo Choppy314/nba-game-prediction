@@ -1,17 +1,17 @@
 # NBA Game Win Probability Prediction
+A machine learning project that predicts NBA game outcomes using team stats and recent performance.
 
-**Machine Learning project predicting NBA game outcomes using team statistics and player impact metrics.**
+## About this project
+I started this mainly because I’ve always wanted to try building a sports forecasting model. As a basketball fan, this is first and foremost a passion project of mine.
 
-## Project Overview
-This is first of all a passion project of mine as I have always wanted to try doing something like this. This project uses machine learning to predict NBA game winners based on:
-- Team efficiency metrics (Offensive/Defensive Rating, Pace, etc...)
-- Rolling averages (last 10 games performance)
-- Advanced statistics (Field Goal %, 3-Point %, Rebounds, Assists, etc.)
-- Contextual factors (home court advantage, rest days, back-to-back games)
-- Differential features (home team stats minus away team stats)
+The model looks at things like:
+- How teams have been playing recently (last 10 games)
+- Team efficiency stats (offensive/defensive ratings)
+- Basic box score stats (shooting percentages, rebounds, assists)
+- Game context (home court, rest days, back-to-backs)
 
-**Training Data:** 2022-23 and 2023-24 NBA seasons (~2,460 complete games)  
-**Test Data:** 2024-25 season (October 2024 - January 2025, ~400-500 games already played). Possibly several games of 2025-26 season.
+**Training Data:** 2022-23 and 2023-24 NBA seasons
+**Test Data:** 2024-25 season. Possibly several games of 2025-26 season up for implementation.
 
 **Goal:** Achieve 65-70% accuracy with proper probability calibration (Brier Score < 0.24)
 
@@ -23,55 +23,35 @@ This is first of all a passion project of mine as I have always wanted to try do
 
 ### How to install
 ```bash
-# 1. Clone repository
 git clone https://github.com/YOUR_USERNAME/nba-game-prediction.git
 cd nba-game-prediction
-
-# 2. Install dependencies
 pip install -r requirements.txt
 ```
 
 ### Run Demo
 ```bash
-# Quick evaluation using pre-trained model
 python demo.py
 ```
 
-**Expected Output:**
+**By the end you should see something like:**
 ```
-NBA GAME PREDICTION - EVALUATION 
-Loading test data...
-✓ Loaded 412 test games from 2024-25 season
-
-Loading pre-trained model...
-✓ Model loaded 
-
-Evaluating on test set...
-
-RESULTS: 
-Accuracy:     67.23%
-Brier Score:  0.2289
-
-Test Period: October 2024 - January 2025
-Evaluation complete!
+ Model Comparison
+                     Accuracy     Brier
+Logistic Regression  0.693061  0.200723
+Random Forest        0.691429  0.204916
+XGBoost              0.652245  0.224619
 ```
 
 ## How It Works
 
 ### Data Collection
-**Training Seasons (Complete):**
-- 2022-23 season: 1,230 games
-- 2023-24 season: 1,230 games
-- **Total training data:** ~2,460 games
+Training: 2021-22 through 2023-24 seasons (~3,700 games)
 
-**Test Season (Games Already Played):**
-- 2024-25 season: October 2024 - January 2025
-- **Test data:** ~400-500 games (varies by collection date)
+Testing: 2024-25 season games that have already been played (~1,200 games)
 
-**Why this split?**
-- Works in a similar real-world prediction scenario
+I used real games that already happened so we can properly test the model's accuracy.
 
-### Feature Engineering
+### What the Model Looks At
 
 **Rolling Statistics (10-game window):**
 For each team, calculate rolling averages of:
@@ -93,24 +73,17 @@ For each team, calculate rolling averages of:
 - DIFF_FG_PCT_L10, DIFF_REB_L10, etc.
 - Captures relative team strength
 
-**Total Features:** ~30
-
 ### Models
 
 I decided to use three following models for comparison:
 
-1. **Logistic Regression** (Baseline)
-   - Simple, interpretable
-   - Good for understanding feature importance
-   
-2. **Random Forest**
-   - Handles non-linear relationships
-   - Provides feature importance rankings
+- Logistic Regression - Simple but effective baseline
 
-3. **XGBoost** (Primary Model)
-   - Best performance
-   - State-of-the-art for tabular data
-   - Used for final predictions
+- Random Forest - Handles complex patterns well
+
+- XGBoost - Usually the best performer for this kind of data
+
+Turns out they all perform similarly (around 65-70% accuracy), which is actually pretty good.
 
 ### Evaluation
 **Primary Metric: Brier Score**
@@ -134,20 +107,19 @@ I decided to use three following models for comparison:
 - Differential features most predictive
 - Back-to-back games: ~5% performance drop
 
-## Reproducing Results
-### Full Pipeline (Optional - Data Already Provided)
-If you were to try to optimize my model or just choose different train and test datasets, here is what you would have to modify and the run.
+## For Developers
+If you want to run the full pipeline:
 ```bash
-# Step 1: Collect data (~30 minutes)
+# Collect fresh data from NBA API
 python src/data_collection.py
 
-# Step 2: Create features (~10 minutes)  
+# Create features from raw data
 python src/feature_engineering.py
 
-# Step 3: Train models (~5 minutes)
+# Train all models
 python src/train.py
 
-# Step 4: Evaluate
+# Compare model performance
 python src/evaluate.py
 ```
 
@@ -169,17 +141,22 @@ python src/evaluate.py
 - Training: October 2022 - April 2024
 - Test: October 2024 - January 2025
 
-## How to test the model
-TODO
-
-## Code Attribution
-TODO
+## About the Code
+This was built for my Intro to AI class. The code is intentionally kept simple and readable rather than overly optimized. I used:
+- pandas for data processing
+- scikit-learn for machine learning
+- nba_api to get game data
+- Standard Python libraries for everything else
 
 ## Limitations & Future Work
-TODO
+Right now the model is pretty basic. Some things I'd like to improve:
+- Add player-level data (injuries, star players)
+- Include betting lines as features
+- Try neural networks
+- Make predictions for future games
 
-## Dependencies
-TODO
+## License
+This is a student project - feel free to use the code for learning purposes!
 
 ## Author
 **Aziz Umarbaev**
