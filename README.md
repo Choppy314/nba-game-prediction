@@ -10,8 +10,8 @@ This is first of all a passion project of mine as I have always wanted to try do
 - Contextual factors (home court advantage, rest days, back-to-back games)
 - Differential features (home team stats minus away team stats)
 
-**Training Data:** 2022-23 and 2023-24 NBA seasons (~2,460 complete games)  
-**Test Data:** 2024-25 season (October 2024 - January 2025, ~400-500 games already played). Possibly several games of 2025-26 season.
+**Training Data:** 2022-23, 2023-24 and 2024-25 NBA seasons 
+**Test Data:** 2025-26 season (Season is currently ongoing, so we can check the games that have already occured)
 
 **Goal:** Achieve 65-70% accuracy with proper probability calibration (Brier Score < 0.24)
 
