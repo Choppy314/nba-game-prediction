@@ -9,6 +9,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.metrics import accuracy_score, brier_score_loss
 from xgboost import XGBClassifier
+from utils import setup_directories
 
 def load_training_data():
     print("Loading the training data")
@@ -90,6 +91,8 @@ def save_model(model, name):
     print(f"\nSaved model: {filename}")
 
 def main():
+    setup_directories()
+    
     print("\nNBA Game Win Probability Prediction model training")
 
     X_train, y_train, X_test, y_test = load_training_data()

@@ -7,6 +7,7 @@ Creates features from raw game data and team advanced stats
 import pandas as pd
 import numpy as np
 from datetime import timedelta
+from utils import setup_directories
 
 def fix_season_column(df):
     # Had to convert SEASON to string - kept getting merge errors
@@ -217,6 +218,8 @@ def prepare_features_and_target(df):
     return X, y, feature_cols
 
 def main():
+    setup_directories()
+    
     print("Loading raw data")
 
     games = pd.read_csv('data/raw/games.csv')

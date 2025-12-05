@@ -10,6 +10,7 @@ Code Attribution:
 import pandas as pd
 import time
 from nba_api.stats.endpoints import leaguegamefinder, leaguedashteamstats
+from utils import setup_directories
 
 def collect_season_games(season):
     # Collect all games for a specific season
@@ -211,6 +212,7 @@ def save_data(data, output_dir='data/raw'):
     print("\nData saved")
 
 def main():
+    setup_directories()
     data = collect_all_data(
         training_seasons=['2021-22', '2022-23', '2023-24'],
         test_season='2024-25'

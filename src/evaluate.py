@@ -5,6 +5,7 @@ Evaluates saved models and prints key metrics
 import pandas as pd
 import pickle
 from sklearn.metrics import accuracy_score, brier_score_loss
+from utils import setup_directories
 
 MODELS = {
     'Logistic Regression': 'models/logistic_regression_model.pkl',
@@ -37,6 +38,7 @@ def print_results(results, model_name):
     print(f"Brier Score: {results['brier_score']:.3f}")
 
 def main():
+    setup_directories() 
     print("\nNBA Game Win Probability Prediction model evaluation")
     X_test, y_test = load_test_data()
     
