@@ -10,10 +10,7 @@ The model looks at things like:
 - Basic box score stats (shooting percentages, rebounds, assists)
 - Game context (home court, rest days, back-to-backs)
 
-**Training Data:** 2021-22, 2022-23 and 2023-24 NBA seasons
-**Test Data:** 2024-25 season. Possibly several games of 2025-26 season up for implementation.
-
-**Goal:** Achieve 65-70% accuracy with proper probability calibration (Brier Score < 0.24)
+The model was trained on three NBA seasons (2021-22, 2022-23, 2023-24) and tested on the 2024-25 season, achieving approximately 68-69% prediction accuracy
 
 ## How to start
 
@@ -22,16 +19,43 @@ The model looks at things like:
 - pip
 
 ### How to install
+Download or clone this project and then navigate to the project directory in your terminal
+
 ```bash
-git clone https://github.com/YOUR_USERNAME/nba-game-prediction.git
 cd nba-game-prediction
+```
+
+Then, install all required packages
+
+```bash
 pip install -r requirements.txt
 ```
 
-### Run Demo
+### How to run
+#### Option 1: Automated pipeline
+
 ```bash
 python demo.py
 ```
+
+#### Option 2: Manual pipeline
+Run each script individually:
+
+```bash
+# Collect fresh data from NBA API
+python src/data_collection.py
+
+# Create features from raw data
+python src/feature_engineering.py
+
+# Train all models
+python src/train.py
+
+# Compare model performance
+python src/evaluate.py
+```
+
+**Note:** Pre-trained models and processed data are included in the repository. You can skip directly to evaluation with `python demo.py`.
 
 **By the end you should see something like:**
 ```
@@ -106,24 +130,6 @@ Turns out they all perform similarly (around 65-70% accuracy), which is actually
 - Rolling averages (10 games) optimal window
 - Differential features most predictive
 - Back-to-back games: ~5% performance drop
-
-## For Developers
-If you want to run the full pipeline:
-```bash
-# Collect fresh data from NBA API
-python src/data_collection.py
-
-# Create features from raw data
-python src/feature_engineering.py
-
-# Train all models
-python src/train.py
-
-# Compare model performance
-python src/evaluate.py
-```
-
-**Note:** Pre-trained models and processed data are included in the repository. You can skip directly to evaluation with `python demo.py`.
 
 ## Data Sources
 
