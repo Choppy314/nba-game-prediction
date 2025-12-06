@@ -126,11 +126,39 @@ Turns out they all perform similarly (around 65-70% accuracy), which is actually
 - Standard metric in probabilistic forecasting
 
 ### Key Insights
-- Home court advantage: ~3-4 percentage points
-- Rolling averages (10 games) optimal window
-- Differential features most predictive
-- Back-to-back games: ~5% performance drop
+Here are the main insights I was able to outline:
 
+1. Model Performance Comparison
+
+It seems that feature engineering matters more than model complexity itself. There is not much of a substantial gap between the simplest (Logistric Regression) and most complex (XGBoost) models. Given that, it suggests that the well-constructed features already capture most of the patterns. Projects with poorly engineered features tend to see 10-15% gaps between simple and complex models.
+Additionally, all models significantly outperform baselines. For example, random guessing (50%) or always picking a home team (around 54-59%) are outperformed by the used models
+
+2. Most Predictive Features
+
+- Net Rating Differential is probably the single strongest predictor. This metric (offensive rating - defensive rating per 100 posessions) aims to capture overall team quality. To demonstrate, a team with +8 Net Rating playing a team with -3 Net Rating creates an 11-point differential, which in turn heavily influences outcomes.
+- Recent performance, namely rolling 10-game averages, outshine the regular season-long statistics. A team averaging 118 PPG over their last 10 games better reflects current form of the team, rather than their season average of 111 PPG, which probably shows the early-season struggles. Recent statistics manage to capture the momentum and the current team state.
+- Back-to-back games create a win probability disadvantage. Physical fatigue affects every aspect of the game, including the mental part of it. This effect appears consistently across all teams regardless of roster depth.
+- Rest differential matters when gaps are significant. To demonstrate, a team with 3 days facing a back-to-back opponent has a 2-day advantage, which plays a role in their win probability.
+
+3. Home Court Advantage
+
+- Home teams usually win approximately 58% of games consistently across seasons. After considering the expected team statistics and averages, home court also influences the win probability. The advantage is consistent across teams, suggesting the common factors rather than specific arena characteristics:
+
+  - Travel fatigue and disrupted routines
+  - Home crowd support and subtle referee bias
+  -  Maintaining normal sleep and meal schedules
+
+4. Limitations & Future Work
+Right now the model is pretty basic. Some things I'd like to improve:
+- Add player-level data (injuries, star players, trades): Star player injuries dramatically affect the team performance. In the same fashion, sudden trades create this lag periods where predictions use non-relevant and outdated roster constructions. These are only a few examples.
+- No situational context: The model does not take into account the rivalries, possible playoff stakes and coaching changes, for example.
+- Include betting lines as features
+- Inherent randomness: There is always a possibility of a 40% three-point shooter shooting way below or above the average in any single game. Additionally, last-second shots, referee calls and hot/cold streaks present a volatility that no model can predict.
+- Try neural networks
+- Make predictions for future games
+- Try to also include playoffs?
+- Be able to run a playoff simulations
+   
 ## Data Sources
 
 **NBA Official API** (via `nba_api` Python package)
@@ -153,15 +181,6 @@ This was built for my Intro to AI class. The code is intentionally kept simple a
 - scikit-learn for machine learning
 - nba_api to get game data
 - Standard Python libraries for everything else
-
-## Limitations & Future Work
-Right now the model is pretty basic. Some things I'd like to improve:
-- Add player-level data (injuries, star players)
-- Include betting lines as features
-- Try neural networks
-- Make predictions for future games
-- Try to also include playoffs?
-- Be able to run a playoff simulations
 
 ## License
 This is a student project - feel free to use the code for learning purposes!
